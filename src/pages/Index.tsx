@@ -38,12 +38,12 @@ const Index = () => {
       
       {/* Main Content Grid - Optimizado para móvil apaisado */}
       <div className="px-3 pb-3 sm:px-6 sm:pb-6">
-        <div className="grid grid-cols-12 gap-2 sm:gap-4 lg:gap-6 h-[calc(100vh-100px)] sm:h-[calc(100vh-120px)]">
+        <div className="grid grid-cols-12 gap-2 sm:gap-4 lg:gap-6 max-h-[calc(100vh-140px)] sm:max-h-[calc(100vh-160px)]">
           
           {/* Columna principal - Tarjetas de temperatura */}
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-lg sm:text-xl font-bold text-midnight-teal mb-2 sm:mb-4">Control de Temperatura</h2>
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 h-full">
+            <h2 className="text-lg sm:text-xl font-bold text-midnight-teal mb-2 sm:mb-3">Control de Temperatura</h2>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -58,7 +58,7 @@ const Index = () => {
           </div>
           
           {/* Columna lateral - responsive */}
-          <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-4">
+          <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
             
             {/* Producción Solar */}
             <div className="col-span-1">
@@ -79,7 +79,7 @@ const Index = () => {
         </div>
         
         {/* Banner inferior - Eco-hack */}
-        <div className="mt-3 sm:mt-6">
+        <div className="mt-2 sm:mt-4">
           <EcoHackBanner />
         </div>
       </div>

@@ -41,23 +41,23 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
   };
 
   return (
-    <div className={`bg-white rounded-lg p-3 sm:p-6 shadow-md border-2 transition-all duration-200 hover:shadow-lg ${
+    <div className={`bg-white rounded-lg p-2 sm:p-3 shadow-md border-2 transition-all duration-200 hover:shadow-lg h-fit ${
       isActive ? 'border-sage-green' : 'border-dusty-cyan/30'
     }`}>
-      <div className="flex justify-between items-start mb-2 sm:mb-3">
-        <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">{room}</h3>
+      <div className="flex justify-between items-start mb-1 sm:mb-2">
+        <h3 className="text-xs sm:text-base font-semibold text-midnight-teal">{room}</h3>
         {getTempComparison()}
       </div>
       
-      <div className="space-y-1 sm:space-y-2">
-        <div className="flex items-baseline space-x-1 sm:space-x-2">
-          <span className="text-xl sm:text-3xl font-bold text-midnight-teal">{currentTemp}°C</span>
+      <div className="space-y-1">
+        <div className="flex items-baseline space-x-1">
+          <span className="text-lg sm:text-2xl font-bold text-midnight-teal">{currentTemp}°C</span>
           {targetTemp && (
-            <span className="text-dusty-cyan text-xs sm:text-sm">objetivo: {targetTemp}°C</span>
+            <span className="text-dusty-cyan text-xs">objetivo: {targetTemp}°C</span>
           )}
         </div>
         
-        <p className={`text-xs sm:text-sm font-medium ${getStatusColor()}`}>
+        <p className={`text-xs font-medium ${getStatusColor()}`}>
           {getStatusText()}
         </p>
       </div>
