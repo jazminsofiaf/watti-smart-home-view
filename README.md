@@ -1,18 +1,15 @@
-# Welcome to your Lovable project
+# EcoClim
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/eb2d3bfd-650f-4276-bae5-19923c312b40
 
-## How can I edit this code?
 
-There are several ways of editing your application.
+**Update using Lovable**
 
-**Use Lovable**
+Changes made via Lovable will be committed automatically to this repo.
 
 Simply visit the [Lovable Project](https://lovable.dev/projects/eb2d3bfd-650f-4276-bae5-19923c312b40) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
