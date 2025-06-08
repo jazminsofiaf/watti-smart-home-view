@@ -34,7 +34,7 @@ const WattiHeader = () => {
       <div className="flex items-center space-x-3 sm:space-x-6">
         <div className="flex items-center space-x-2 sm:space-x-3">
           <img 
-            src="/lovable-uploads/7a4bf22c-161c-43ca-86b8-39a1200c7546.png" 
+            src="/lovable-uploads/d3d8b8de-9c02-4df7-9590-7cb20a8c7462.png" 
             alt="Ecodim Logo" 
             className="h-6 sm:h-8 w-auto"
           />
