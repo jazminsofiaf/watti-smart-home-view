@@ -17,9 +17,9 @@ const AlertsSection = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'border-l-orange-500 bg-orange-50';
-      case 'medium': return 'border-l-dusty-cyan bg-blue-50';
-      default: return 'border-l-gray-400 bg-gray-50';
+      case 'high': return 'border-l-dusty-cyan bg-sage-green/10';
+      case 'medium': return 'border-l-deep-slate-blue bg-dusty-cyan/10';
+      default: return 'border-l-dusty-cyan bg-ivory-mist';
     }
   };
 

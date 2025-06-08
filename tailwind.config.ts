@@ -20,7 +20,7 @@ export default {
 		},
 		extend: {
 			colors: {
-				// Watti Brand Colors
+				// Ecodim Brand Colors
 				'ivory-mist': '#EFF6E0',
 				'midnight-teal': '#023346',
 				'dusty-cyan': '#598392',

@@ -22,8 +22,8 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
 
   const getStatusColor = () => {
     switch (status) {
-      case 'heating': return 'text-orange-500';
-      case 'cooling': return 'text-blue-500';
+      case 'heating': return 'text-dusty-cyan';
+      case 'cooling': return 'text-deep-slate-blue';
       case 'off': return 'text-dusty-cyan';
       case 'auto': return 'text-sage-green';
       default: return 'text-dusty-cyan';
@@ -33,9 +33,9 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
   const getTempComparison = () => {
     if (!targetTemp) return null;
     if (currentTemp < targetTemp) {
-      return <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500" />;
+      return <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 text-dusty-cyan" />;
     } else if (currentTemp > targetTemp) {
-      return <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />;
+      return <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 text-deep-slate-blue" />;
     }
     return null;
   };

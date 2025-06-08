@@ -32,6 +32,13 @@ const WattiHeader = () => {
   return (
     <div className="flex justify-between items-center mb-3 sm:mb-6 px-3 sm:px-6 py-2 sm:py-4">
       <div className="flex items-center space-x-3 sm:space-x-6">
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          <img 
+            src="/lovable-uploads/7a4bf22c-161c-43ca-86b8-39a1200c7546.png" 
+            alt="Ecodim Logo" 
+            className="h-6 sm:h-8 w-auto"
+          />
+        </div>
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-midnight-teal">Hola Alicia</h1>
           <p className="text-dusty-cyan text-xs sm:text-sm capitalize">{formatDate(currentTime)}</p>

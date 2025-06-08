@@ -3,11 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Watti Brand Design System */
+/* Ecodim Brand Design System */
 
 @layer base {
   :root {
-    /* Watti Brand Colors */
+    /* Ecodim Brand Colors */
     --ivory-mist: #EFF6E0;
     --midnight-teal: #023346;
     --dusty-cyan: #598392;
@@ -29,8 +29,8 @@
     --muted-foreground: var(--deep-slate-blue);
     --accent: var(--sage-green);
     --accent-foreground: var(--midnight-teal);
-    --destructive: 220 38% 47%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: var(--dusty-cyan);
+    --destructive-foreground: 255 255 255;
     --border: var(--dusty-cyan);
     --input: var(--dusty-cyan);
     --ring: var(--sage-green);
@@ -50,7 +50,7 @@
   }
 }
 
-/* Custom Watti utilities */
+/* Custom Ecodim utilities */
 @layer utilities {
   .text-ivory-mist { color: #EFF6E0; }
   .text-midnight-teal { color: #023346; }
@@ -66,4 +66,6 @@
   
   .border-dusty-cyan { border-color: #598392; }
   .border-sage-green { border-color: #AEC3B0; }
+  .border-midnight-teal { border-color: #023346; }
+  .border-deep-slate-blue { border-color: #124559; }
 }
