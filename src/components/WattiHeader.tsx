@@ -30,20 +30,20 @@ const WattiHeader = () => {
   };
 
   return (
-    <div className="flex justify-between items-center mb-6 px-6 py-4">
-      <div className="flex items-center space-x-6">
+    <div className="flex justify-between items-center mb-3 sm:mb-6 px-3 sm:px-6 py-2 sm:py-4">
+      <div className="flex items-center space-x-3 sm:space-x-6">
         <div>
-          <h1 className="text-2xl font-bold text-midnight-teal">Hola Alicia</h1>
-          <p className="text-dusty-cyan text-sm capitalize">{formatDate(currentTime)}</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-midnight-teal">Hola Alicia</h1>
+          <p className="text-dusty-cyan text-xs sm:text-sm capitalize">{formatDate(currentTime)}</p>
         </div>
         <div className="text-right">
-          <p className="text-3xl font-bold text-midnight-teal">{formatTime(currentTime)}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-midnight-teal">{formatTime(currentTime)}</p>
         </div>
       </div>
       
-      <div className="flex items-center space-x-2">
-        <Wifi className="w-6 h-6 text-sage-green animate-pulse-gentle" />
-        <span className="text-dusty-cyan text-sm">Conectado</span>
+      <div className="flex items-center space-x-1 sm:space-x-2">
+        <Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-sage-green animate-pulse-gentle" />
+        <span className="text-dusty-cyan text-xs sm:text-sm">Conectado</span>
       </div>
     </div>
   );

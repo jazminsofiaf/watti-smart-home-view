@@ -33,31 +33,31 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
   const getTempComparison = () => {
     if (!targetTemp) return null;
     if (currentTemp < targetTemp) {
-      return <ArrowUp className="w-4 h-4 text-orange-500" />;
+      return <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500" />;
     } else if (currentTemp > targetTemp) {
-      return <ArrowDown className="w-4 h-4 text-blue-500" />;
+      return <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />;
     }
     return null;
   };
 
   return (
-    <div className={`bg-white rounded-lg p-6 shadow-md border-2 transition-all duration-200 hover:shadow-lg ${
+    <div className={`bg-white rounded-lg p-3 sm:p-6 shadow-md border-2 transition-all duration-200 hover:shadow-lg ${
       isActive ? 'border-sage-green' : 'border-dusty-cyan/30'
     }`}>
-      <div className="flex justify-between items-start mb-3">
-        <h3 className="text-lg font-semibold text-midnight-teal">{room}</h3>
+      <div className="flex justify-between items-start mb-2 sm:mb-3">
+        <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">{room}</h3>
         {getTempComparison()}
       </div>
       
-      <div className="space-y-2">
-        <div className="flex items-baseline space-x-2">
-          <span className="text-3xl font-bold text-midnight-teal">{currentTemp}°C</span>
+      <div className="space-y-1 sm:space-y-2">
+        <div className="flex items-baseline space-x-1 sm:space-x-2">
+          <span className="text-xl sm:text-3xl font-bold text-midnight-teal">{currentTemp}°C</span>
           {targetTemp && (
-            <span className="text-dusty-cyan text-sm">objetivo: {targetTemp}°C</span>
+            <span className="text-dusty-cyan text-xs sm:text-sm">objetivo: {targetTemp}°C</span>
           )}
         </div>
         
-        <p className={`text-sm font-medium ${getStatusColor()}`}>
+        <p className={`text-xs sm:text-sm font-medium ${getStatusColor()}`}>
           {getStatusText()}
         </p>
       </div>

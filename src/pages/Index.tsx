@@ -33,17 +33,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-ivory-mist">
-      {/* Header */}
+      {/* Header optimizado para móvil */}
       <WattiHeader />
       
-      {/* Main Content Grid - Optimizado para modo apaisado */}
-      <div className="px-6 pb-6">
-        <div className="grid grid-cols-12 gap-6 h-[calc(100vh-120px)]">
+      {/* Main Content Grid - Optimizado para móvil apaisado */}
+      <div className="px-3 pb-3 sm:px-6 sm:pb-6">
+        <div className="grid grid-cols-12 gap-2 sm:gap-4 lg:gap-6 h-[calc(100vh-100px)] sm:h-[calc(100vh-120px)]">
           
-          {/* Columna principal - Tarjetas de temperatura (ocupa la mayor parte) */}
-          <div className="col-span-8">
-            <h2 className="text-xl font-bold text-midnight-teal mb-4">Control de Temperatura</h2>
-            <div className="grid grid-cols-3 gap-4 h-full">
+          {/* Columna principal - Tarjetas de temperatura */}
+          <div className="col-span-12 lg:col-span-8">
+            <h2 className="text-lg sm:text-xl font-bold text-midnight-teal mb-2 sm:mb-4">Control de Temperatura</h2>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 h-full">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -57,23 +57,29 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Columna lateral derecha */}
-          <div className="col-span-4 space-y-4">
+          {/* Columna lateral - responsive */}
+          <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-4">
             
             {/* Producción Solar */}
-            <SolarProduction />
+            <div className="col-span-1">
+              <SolarProduction />
+            </div>
             
             {/* Próxima Visita */}
-            <NextVisit />
+            <div className="col-span-1">
+              <NextVisit />
+            </div>
             
-            {/* Alertas */}
-            <AlertsSection />
+            {/* Alertas - span completo en móvil */}
+            <div className="col-span-2 lg:col-span-1">
+              <AlertsSection />
+            </div>
             
           </div>
         </div>
         
         {/* Banner inferior - Eco-hack */}
-        <div className="mt-6">
+        <div className="mt-3 sm:mt-6">
           <EcoHackBanner />
         </div>
       </div>
