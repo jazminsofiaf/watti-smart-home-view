@@ -33,31 +33,34 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
   const getTempComparison = () => {
     if (!targetTemp) return null;
     if (currentTemp < targetTemp) {
-      return <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 text-dusty-cyan" />;
+      return <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 text-dusty-cyan" />;
     } else if (currentTemp > targetTemp) {
-      return <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 text-deep-slate-blue" />;
+      return <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-deep-slate-blue" />;
     }
     return null;
   };
 
   return (
-    <div className={`bg-white rounded-lg p-2 sm:p-3 shadow-md border-2 transition-all duration-200 hover:shadow-lg h-fit ${
+    <div className={`bg-white rounded-lg p-3 sm:p-4 shadow-lg border-2 transition-all duration-200 hover:shadow-xl h-full flex flex-col justify-between ${
       isActive ? 'border-sage-green' : 'border-dusty-cyan/30'
     }`}>
-      <div className="flex justify-between items-start mb-1 sm:mb-2">
-        <h3 className="text-xs sm:text-base font-semibold text-midnight-teal">{room}</h3>
+      <div className="flex justify-between items-start mb-2">
+        <h3 className="text-sm sm:text-lg font-bold text-midnight-teal">{room}</h3>
         {getTempComparison()}
       </div>
       
-      <div className="space-y-1">
-        <div className="flex items-baseline space-x-1">
-          <span className="text-lg sm:text-2xl font-bold text-midnight-teal">{currentTemp}°C</span>
-          {targetTemp && (
-            <span className="text-dusty-cyan text-xs">objetivo: {targetTemp}°C</span>
-          )}
+      <div className="flex-1 flex flex-col justify-center space-y-2">
+        <div className="flex items-baseline justify-center space-x-2">
+          <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-midnight-teal">{currentTemp}°C</span>
         </div>
         
-        <p className={`text-xs font-medium ${getStatusColor()}`}>
+        {targetTemp && (
+          <div className="text-center">
+            <span className="text-dusty-cyan text-xs sm:text-sm">objetivo: {targetTemp}°C</span>
+          </div>
+        )}
+        
+        <p className={`text-xs sm:text-sm font-medium text-center ${getStatusColor()}`}>
           {getStatusText()}
         </p>
       </div>
