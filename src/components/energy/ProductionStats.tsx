@@ -1,9 +1,18 @@
 
 import { TrendingUp, Euro } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductionStats = () => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    console.log('Navigating to energy flow...');
+    navigate('/energy-flow');
+  };
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 h-full">
+    <div 
+    onClick={handleClick}
+    className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 h-full">
       <h3 className="text-lg font-semibold text-midnight-teal mb-3">Estadísticas de Producción</h3>
       
       <div className="grid grid-cols-2 gap-3">

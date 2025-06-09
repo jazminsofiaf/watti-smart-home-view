@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import EnergyDashboard from "./pages/EnergyDashboard";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
+import EnergyFlow from "./components/energy/EnergyFlow";
+import EnergyFlowDetails from "./pages/EnergyFlowDetails";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/energy-dashboard" element={<EnergyDashboard />} />
+             <Route path="/energy-flow" element={<EnergyFlowDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

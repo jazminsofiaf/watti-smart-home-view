@@ -1,13 +1,26 @@
+import { useNavigate } from "react-router-dom";
 
 const ConsumptionChart = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log('Navigating to energy flow...');
+    navigate('/energy-flow');
+  };
+  
   const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
   const production = [420, 380, 450, 485, 520, 485];
   const consumption = [380, 340, 400, 430, 460, 420];
 
   const maxValue = Math.max(...production, ...consumption);
 
+ 
+
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 ">
+    <div 
+    onClick={handleClick}
+    className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 ">
       <h3 className="text-lg font-semibold text-midnight-teal mb-3">Producción vs Consumo</h3>
       
       <div className="flex items-end justify-between space-x-2">

@@ -1,11 +1,21 @@
 
 import { Sun, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const SolarHours = () => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    console.log('Navigating to energy flow...');
+    navigate('/energy-flow');
+  };
+  
   const solarPercentage = 78;
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 h-full">
+    <div 
+    onClick={handleClick}
+    className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 h-full">
       <h3 className="text-lg font-semibold text-midnight-teal mb-3">Horas Solares</h3>
       
       <div className="text-center">
