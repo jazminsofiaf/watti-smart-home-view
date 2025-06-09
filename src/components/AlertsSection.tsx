@@ -1,3 +1,4 @@
+import { AlertCircle } from "lucide-react";
 
 const AlertsSection = () => {
   const alerts = [
@@ -12,6 +13,12 @@ const AlertsSection = () => {
       type: 'weather',
       message: 'Pronóstico: ola de calor este miércoles, activá modo eco inteligente',
       priority: 'high'
+    },
+    {
+      id: 3,
+      type: 'device',
+      message: 'El sensor del dormitorio no responde',
+      priority: 'medium'
     }
   ];
 
@@ -23,18 +30,37 @@ const AlertsSection = () => {
     }
   };
 
+  const maxVisible = 1;
+  const visibleAlerts = alerts.slice(0, maxVisible);
+
   return (
     <div className="space-y-2 sm:space-y-3">
-      <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">Alertas</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-2 sm:gap-3">
-        {alerts.map((alert) => (
-          <div
-            key={alert.id}
-            className={`bg-white rounded-lg p-2 sm:p-4 border-l-4 shadow-sm ${getPriorityColor(alert.priority)}`}
+      <div className="flex items-center gap-2 sm:gap-3 mb-2">
+        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5  shrink-0 self-center" />
+        <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">Alertas</h3>
+        {/* Show more */}
+        {alerts.length > maxVisible && (
+          <button
+            onClick={() => console.log("navigate to full alerts page")}
+            className="mt-2 text-xs sm:text-sm text-dusty-cyan underline hover:text-midnight-teal transition"
           >
-            <p className="text-midnight-teal text-xs sm:text-sm">{alert.message}</p>
-          </div>
-        ))}
+            Ver todas →
+          </button>
+        )}
+      </div>
+
+    {/* Alerts list (scrollable if needed) */}
+      <div className="flex-1 overflow-hidden">
+        <div className="space-y-2 sm:space-y-3 overflow-y-auto pr-1 max-h-full">
+          {visibleAlerts.map((alert) => (
+            <div
+              key={alert.id}
+              className={`bg-white rounded-lg p-2 sm:p-3 border-l-4 shadow-sm ${getPriorityColor(alert.priority)}`}
+            >
+              <p className="text-midnight-teal text-xs sm:text-sm">{alert.message}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

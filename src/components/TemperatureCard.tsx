@@ -4,7 +4,7 @@ import { ArrowUp, ArrowDown } from 'lucide-react';
 interface TemperatureCardProps {
   room: string;
   currentTemp: number;
-  targetTemp?: string;
+  targetTemp?: number;
   status: 'heating' | 'cooling' | 'off' | 'auto';
   isActive: boolean;
 }
@@ -53,15 +53,21 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
         <div className="flex items-baseline justify-center space-x-2">
           <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-midnight-teal">{currentTemp}°C</span>
         </div>
-      
+        
         <p className={`text-xs sm:text-sm font-medium text-center ${getStatusColor()}`}>
           {getStatusText()}
         </p>
 
-        <div className="text-center">
-          <span className="text-dusty-cyan text-xs sm:text-sm">objetivo: {targetTemp}</span>
-        </div>
-
+        {targetTemp && (
+          <div className="text-center">
+            <span className="text-dusty-cyan text-xs sm:text-sm">objetivo: {targetTemp}°C</span>
+          </div>
+        )}
+        {!targetTemp && (
+          <div className="text-center">
+            <span className="text-dusty-cyan text-xs sm:text-sm">objetivo: - </span>
+          </div>
+        )}
       </div>
     </div>
   );

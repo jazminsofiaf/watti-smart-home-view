@@ -3,14 +3,19 @@ import { Calendar } from 'lucide-react';
 
 const NextVisit = () => {
   return (
-    <div className="bg-white rounded-lg p-3 sm:p-6 shadow-md border border-dusty-cyan/30 h-full">
-      <div className="flex items-center space-x-2 sm:space-x-3 mb-2">
-        <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-dusty-cyan" />
-        <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">Próxima Visita</h3>
+     <div 
+      className="h-full flex flex-col justify-between bg-white rounded-lg p-2 sm:p-5 shadow-md border border-dusty-cyan/30 cursor-pointer hover:shadow-lg hover:border-sage-green/50 transition-all duration-200"
+    >
+      
+      <div className="flex items-center gap-1 sm:gap-3">
+        <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-dusty-cyan shrink-0 self-center" />
+        <h3 className="text-xs sm:text-sm font-semibold text-midnight-teal">
+          Próxima Visita
+        </h3>
       </div>
       
       <div className="space-y-1">
-        <p className="text-midnight-teal font-medium text-xs sm:text-base">Limpieza aire dormitorio</p>
+        <p className="text-dusty-cyan text-xs  mb-0.5">Limpieza aire dormitorio</p>
         <p className="text-dusty-cyan text-xs sm:text-sm">Viernes 10:30</p>
       </div>
     </div>

@@ -12,21 +12,21 @@ const Index = () => {
     {
       room: 'Dormitorio',
       currentTemp: 22,
-      targetTemp: "23°C",
+      targetTemp: 23,
       status: 'heating' as const,
       isActive: true
     },
     {
       room: 'Salón',
       currentTemp: 21,
-      targetTemp: "21°C",
+      targetTemp: 21,
       status: 'cooling' as const,
       isActive: true
     },
     {
       room: 'Cocina',
       currentTemp: 19,
-      targetTemp: '-',
+      targetTemp: undefined,
       status: 'off' as const,
       isActive: false
     }
@@ -56,7 +56,7 @@ const Index = () => {
             </div>
             
             {/* Tarjetas de temperatura */}
-            <div className="grid grid-cols-3 gap-3 flex-1 min-h-0 overflow-y-auto">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -76,8 +76,8 @@ const Index = () => {
           </div>
           
           {/* Columna lateral compacta */}
-          <div className="col-span-3 grid grid-rows-3 gap-2 h-full overflow-hidden">
-            <div className="row-span-1 h-full overflow-hidden">
+          <div className="col-span-3 grid grid-rows-4 gap-2 h-full overflow-hidden">
+            <div className="row-span-2 h-full overflow-hidden">
               <SolarProduction />
             </div>
             <div className="row-span-1 h-full overflow-hidden">
