@@ -7,10 +7,10 @@ const ConsumptionChart = () => {
   const maxValue = Math.max(...production, ...consumption);
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 h-full">
+    <div className="bg-white rounded-lg p-4 shadow-md border border-dusty-cyan/30 ">
       <h3 className="text-lg font-semibold text-midnight-teal mb-3">Producción vs Consumo</h3>
       
-      <div className="flex items-end justify-between h-[calc(100%-100px)] space-x-2">
+      <div className="flex items-end justify-between space-x-2">
         {months.map((month, index) => (
           <div key={month} className="flex-1 flex flex-col items-center">
             <div className="flex items-end space-x-1 mb-2 h-24">
