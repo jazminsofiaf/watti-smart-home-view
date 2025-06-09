@@ -33,21 +33,25 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-ivory-mist">
-      {/* Header optimizado para móvil */}
-      <WattiHeader />
+    <div className="min-h-screen bg-ivory-mist overflow-hidden">
+      {/* Header compacto */}
+      <div className="h-16">
+        <WattiHeader />
+      </div>
       
-      {/* Main Content Grid - Optimizado para móvil apaisado */}
-      <div className="px-2 pb-2 sm:px-4 sm:pb-4">
-        <div className="grid grid-cols-12 gap-2 sm:gap-3 max-h-[calc(100vh-120px)]">
+      {/* Main Content Grid - Sin scroll, altura fija */}
+      <div className="px-2 h-[calc(100vh-64px)]">
+        <div className="grid grid-cols-12 gap-2 h-full">
           
-          {/* Columna principal - Tarjetas de temperatura MÁS GRANDES */}
-          <div className="col-span-12 lg:col-span-9">
-            <div className="flex justify-between items-center mb-3">
-              <h2 className="text-lg sm:text-xl font-bold text-midnight-teal">Control de Temperatura</h2>
+          {/* Columna principal - Tarjetas de temperatura */}
+          <div className="col-span-9 flex flex-col">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-lg font-bold text-midnight-teal">Control de Temperatura</h2>
               <VoiceAssistant />
             </div>
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 h-[140px] sm:h-[160px]">
+            
+            {/* Tarjetas de temperatura más grandes */}
+            <div className="grid grid-cols-3 gap-3 flex-1 min-h-0">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -59,32 +63,25 @@ const Index = () => {
                 />
               ))}
             </div>
+            
+            {/* Banner inferior compacto */}
+            <div className="mt-2">
+              <EcoHackBanner />
+            </div>
           </div>
           
-          {/* Columna lateral más pequeña */}
-          <div className="col-span-12 lg:col-span-3 grid grid-cols-3 lg:grid-cols-1 gap-2">
-            
-            {/* Producción Solar */}
-            <div className="col-span-1">
+          {/* Columna lateral compacta */}
+          <div className="col-span-3 grid grid-rows-3 gap-2 h-full">
+            <div className="row-span-1">
               <SolarProduction />
             </div>
-            
-            {/* Próxima Visita */}
-            <div className="col-span-1">
+            <div className="row-span-1">
               <NextVisit />
             </div>
-            
-            {/* Alertas */}
-            <div className="col-span-1">
+            <div className="row-span-1">
               <AlertsSection />
             </div>
-            
           </div>
-        </div>
-        
-        {/* Banner inferior - Eco-hack más compacto */}
-        <div className="mt-2">
-          <EcoHackBanner />
         </div>
       </div>
     </div>

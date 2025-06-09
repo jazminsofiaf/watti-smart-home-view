@@ -1,7 +1,18 @@
 
+import { useNavigate } from 'react-router-dom';
+
 const SolarProduction = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/energy-dashboard');
+  };
+
   return (
-    <div className="bg-white rounded-lg p-3 sm:p-6 shadow-md border border-dusty-cyan/30 h-full">
+    <div 
+      onClick={handleClick}
+      className="bg-white rounded-lg p-3 sm:p-6 shadow-md border border-dusty-cyan/30 h-full cursor-pointer hover:shadow-lg hover:border-sage-green/50 transition-all duration-200"
+    >
       <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal mb-2 sm:mb-4">Producción Solar</h3>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
