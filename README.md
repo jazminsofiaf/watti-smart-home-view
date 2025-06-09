@@ -1,9 +1,5 @@
 # EcoClim
 
-## Project info
-
-
-
 **Update using Lovable**
 
 Changes made via Lovable will be committed automatically to this repo.
