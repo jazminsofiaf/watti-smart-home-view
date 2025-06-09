@@ -77,13 +77,13 @@ const Index = () => {
           
           {/* Columna lateral compacta */}
           <div className="col-span-3 grid grid-rows-3 gap-2 h-full overflow-hidden">
-            <div className="row-span-1">
+            <div className="row-span-1 h-full overflow-hidden">
               <SolarProduction />
             </div>
-            <div className="row-span-1">
+            <div className="row-span-1 h-full overflow-hidden">
               <NextVisit />
             </div>
-            <div className="row-span-1">
+            <div className="row-span-1 h-full overflow-hidden">
               <AlertsSection />
             </div>
           </div>
