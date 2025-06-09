@@ -11,6 +11,8 @@ import SolarHours from '@/components/energy/SolarHours';
 const EnergyDashboard = () => {
   const navigate = useNavigate();
 
+  console.log('EnergyDashboard component loaded');
+
   return (
     <div className="min-h-screen bg-ivory-mist overflow-hidden">
       {/* Header */}

@@ -5,6 +5,7 @@ const SolarProduction = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    console.log('Navigating to energy dashboard...');
     navigate('/energy-dashboard');
   };
 
