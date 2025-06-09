@@ -34,19 +34,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-ivory-mist overflow-hidden">
-      {/* Header compacto */}
-      <div className="h-16 flex-shrink-0">
-        <WattiHeader />
-      </div>
       
       {/* Main Content Grid - Sin scroll, altura fija */}
       <div className="p-2 flex flex-col  h-full overflow-hidden"
-         style={{ height: "calc(var(--app-height) - 64px)" }}
+         style={{ height: "var(--app-height)" }}
       >
         <div className="grid grid-cols-12 gap-2 h-full">
-          
-          {/* Columna principal - Tarjetas de temperatura */}
+
+              
+          {/* Columna principal - Control de temperatura */}
           <div className="col-span-9 flex flex-col h-full min-h-0 overflow-hidden">
+
+            {/* Header compacto */}
+            <div className="h-16 flex-shrink-0">
+              <WattiHeader />
+            </div>
+
             <div className="flex justify-between items-center mb-2 shrink-0">
               <h2 className="text-lg font-bold text-midnight-teal">Control de Temperatura</h2>
               <VoiceAssistant />
@@ -66,7 +69,7 @@ const Index = () => {
               ))}
             </div>
             
-            {/* Banner inferior compacto */}
+            {/* Banner inferior con eco-hack */}
             <div className="mt-2 shrink-0">
               <EcoHackBanner />
             </div>
