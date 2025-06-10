@@ -1,6 +1,10 @@
+
 import { AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AlertsSection = () => {
+  const navigate = useNavigate();
+  
   const alerts = [
     {
       id: 1,
@@ -33,15 +37,20 @@ const AlertsSection = () => {
   const maxVisible = 1;
   const visibleAlerts = alerts.slice(0, maxVisible);
 
+  const handleViewAll = () => {
+    console.log("Navegando a todas las alertas");
+    navigate('/alerts');
+  };
+
   return (
     <div className="space-y-2 sm:space-y-3">
       <div className="flex items-center gap-2 sm:gap-3 mb-2">
-        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5  shrink-0 self-center" />
+        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 self-center" />
         <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">Alertas</h3>
         {/* Show more */}
         {alerts.length > maxVisible && (
           <button
-            onClick={() => console.log("navigate to full alerts page")}
+            onClick={handleViewAll}
             className="mt-2 text-xs sm:text-sm text-dusty-cyan underline hover:text-midnight-teal transition"
           >
             Ver todas →
@@ -49,13 +58,14 @@ const AlertsSection = () => {
         )}
       </div>
 
-    {/* Alerts list (scrollable if needed) */}
+      {/* Alerts list (scrollable if needed) */}
       <div className="flex-1 overflow-hidden">
         <div className="space-y-2 sm:space-y-3 overflow-y-auto pr-1 max-h-full">
           {visibleAlerts.map((alert) => (
             <div
               key={alert.id}
-              className={`bg-white rounded-lg p-2 sm:p-3 border-l-4 shadow-sm ${getPriorityColor(alert.priority)}`}
+              className={`bg-white rounded-lg p-2 sm:p-3 border-l-4 shadow-sm ${getPriorityColor(alert.priority)} cursor-pointer hover:shadow-md transition-shadow`}
+              onClick={handleViewAll}
             >
               <p className="text-midnight-teal text-xs sm:text-sm">{alert.message}</p>
             </div>

@@ -6,9 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import EnergyDashboard from "./pages/EnergyDashboard";
+import AlertsPage from "./pages/AlertsPage";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
-import EnergyFlow from "./components/energy/EnergyFlow";
 import EnergyFlowDetails from "./pages/EnergyFlowDetails";
 
 const queryClient = new QueryClient();
@@ -36,7 +36,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/energy-dashboard" element={<EnergyDashboard />} />
-             <Route path="/energy-flow" element={<EnergyFlowDetails />} />
+            <Route path="/energy-flow" element={<EnergyFlowDetails />} />
+            <Route path="/alerts" element={<AlertsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
