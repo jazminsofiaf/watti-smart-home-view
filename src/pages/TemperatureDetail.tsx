@@ -206,7 +206,7 @@ const TemperatureDetail = () => {
         {/* Temperature Chart */}
         <div className="bg-white rounded-lg p-6 shadow-lg md:col-span-2">
           <h2 className="text-lg font-bold text-midnight-teal mb-4">Temperatura del Mes</h2>
-          <div className="h-64">
+          <div className="h-48 w-full">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={temperatureData}>
