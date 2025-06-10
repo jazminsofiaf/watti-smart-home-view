@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import EnergyDashboard from "./pages/EnergyDashboard";
 import AlertsPage from "./pages/AlertsPage";
 import EcoHacksPage from "./pages/EcoHacksPage";
+import TemperatureDetail from "./pages/TemperatureDetail";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 import EnergyFlowDetails from "./pages/EnergyFlowDetails";
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/energy-flow" element={<EnergyFlowDetails />} />
             <Route path="/alerts" element={<AlertsPage />} />
             <Route path="/eco-hacks" element={<EcoHacksPage />} />
+            <Route path="/temperature-detail/:roomId" element={<TemperatureDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

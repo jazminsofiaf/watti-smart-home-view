@@ -1,5 +1,6 @@
 
 import { ArrowUp, ArrowDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface TemperatureCardProps {
   room: string;
@@ -7,9 +8,12 @@ interface TemperatureCardProps {
   targetTemp?: number;
   status: 'heating' | 'cooling' | 'off' | 'auto';
   isActive: boolean;
+  roomId: string;
 }
 
-const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: TemperatureCardProps) => {
+const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive, roomId }: TemperatureCardProps) => {
+  const navigate = useNavigate();
+
   const getStatusText = () => {
     switch (status) {
       case 'heating': return 'calefacción encendida';
@@ -40,10 +44,17 @@ const TemperatureCard = ({ room, currentTemp, targetTemp, status, isActive }: Te
     return null;
   };
 
+  const handleClick = () => {
+    navigate(`/temperature-detail/${roomId}`);
+  };
+
   return (
-    <div className={`bg-white rounded-lg p-3 sm:p-4 shadow-lg border-2 transition-all duration-200 hover:shadow-xl h-full flex flex-col justify-between ${
-      isActive ? 'border-sage-green' : 'border-dusty-cyan/30'
-    }`}>
+    <div 
+      className={`bg-white rounded-lg p-3 sm:p-4 shadow-lg border-2 transition-all duration-200 hover:shadow-xl h-full flex flex-col justify-between cursor-pointer hover:scale-[1.02] ${
+        isActive ? 'border-sage-green' : 'border-dusty-cyan/30'
+      }`}
+      onClick={handleClick}
+    >
       <div className="flex justify-between items-start mb-2">
         <h3 className="text-sm sm:text-lg font-bold text-midnight-teal">{room}</h3>
         {getTempComparison()}

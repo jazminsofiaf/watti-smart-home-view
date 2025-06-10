@@ -10,6 +10,7 @@ import VoiceAssistant from '@/components/VoiceAssistant';
 const Index = () => {
   const roomData = [
     {
+      roomId: 'dormitorio',
       room: 'Dormitorio',
       currentTemp: 22,
       targetTemp: 23,
@@ -17,6 +18,7 @@ const Index = () => {
       isActive: true
     },
     {
+      roomId: 'salon',
       room: 'Salón',
       currentTemp: 21,
       targetTemp: 21,
@@ -24,6 +26,7 @@ const Index = () => {
       isActive: true
     },
     {
+      roomId: 'cocina',
       room: 'Cocina',
       currentTemp: 19,
       targetTemp: undefined,
@@ -60,6 +63,7 @@ const Index = () => {
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
+                  roomId={room.roomId}
                   room={room.room}
                   currentTemp={room.currentTemp}
                   targetTemp={room.targetTemp}
