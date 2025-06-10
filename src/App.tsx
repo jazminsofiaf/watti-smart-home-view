@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import EnergyDashboard from "./pages/EnergyDashboard";
 import AlertsPage from "./pages/AlertsPage";
+import EcoHacksPage from "./pages/EcoHacksPage";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 import EnergyFlowDetails from "./pages/EnergyFlowDetails";
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/energy-dashboard" element={<EnergyDashboard />} />
             <Route path="/energy-flow" element={<EnergyFlowDetails />} />
             <Route path="/alerts" element={<AlertsPage />} />
+            <Route path="/eco-hacks" element={<EcoHacksPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
