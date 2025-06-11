@@ -24,12 +24,12 @@ const EnergyFlowDetails = () => {
         <h1 className="ml-3 text-lg font-bold text-midnight-teal">Flujo de energía e impacto ambiental</h1>
       </div>
 
-      {/* Main Content Grid - Fixed heights to prevent overlap */}
-      <div className="px-3 py-2"  style={{ height: "var(--app-height)" }} >
-        <div className="grid grid-cols-12 gap-1 h-full">
+      {/* Main Content Grid - Responsive */}
+      <div className="px-3 py-2" style={{ height: "var(--app-height)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-2 h-full">
           
           {/* Columna izquierda */}
-          <div className="col-span-5 flex-col gap-2">
+          <div className="md:col-span-5 flex flex-col gap-2">
             <div className="flex-1 min-h-0">
               <EnergyDistribution />
             </div>
@@ -39,15 +39,14 @@ const EnergyFlowDetails = () => {
           </div>
 
           {/* Columna central */}
-          <div className="col-span-4 flex-col gap-2 h-full">
+          <div className="md:col-span-4 flex flex-col gap-2 h-full">
             <div className="flex-1 min-h-0">
               <SolarMap />
             </div>
-           
           </div>
 
           {/* Columna derecha */}
-          <div className="col-span-3 flex-col gap-2 h-full">
+          <div className="md:col-span-3 flex flex-col gap-2 h-full">
             <div className="flex-1 min-h-0">
               <EnvironmentalImpact />
             </div>
