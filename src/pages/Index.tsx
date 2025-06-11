@@ -79,20 +79,20 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Columna lateral - En mobile se coloca debajo */}
+          {/* Columna lateral - Siempre en columna */}
           <div className="md:col-span-3 flex flex-col gap-2 h-auto md:h-full">
             
-            {/* Solo en mobile portrait: componentes en fila horizontal, resto en columna */}
-            <div className="flex flex-row portrait:sm:flex-row md:flex-col gap-2 h-auto md:h-full">
-              <div className="flex-1 md:flex-1">
+            {/* Los componentes siempre en columna */}
+            <div className="flex flex-col gap-2 h-auto md:h-full">
+              <div className="md:flex-1">
                 <SolarProduction />
               </div>
               
-              <div className="flex-1 md:h-24 md:shrink-0">
+              <div className="md:h-24 md:shrink-0">
                 <NextVisit />
               </div>
               
-              <div className="flex-1 md:h-20 md:shrink-0">
+              <div className="md:h-20 md:shrink-0">
                 <AlertsSection />
               </div>
             </div>
