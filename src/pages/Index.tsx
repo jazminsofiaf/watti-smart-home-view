@@ -42,11 +42,11 @@ const Index = () => {
       <div className="p-2 flex flex-col h-full overflow-hidden"
          style={{ height: "var(--app-height)" }}
       >
-        {/* Desktop: Grid de 2 columnas, Mobile Portrait: Columna única */}
-        <div className="grid grid-cols-1 landscape:md:grid-cols-12 gap-2 flex-1 min-h-0">
+        {/* Desktop: Grid de 2 columnas, Mobile: Columna única */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-2 flex-1 min-h-0">
               
           {/* Columna principal - Control de temperatura */}
-          <div className="landscape:md:col-span-9 flex flex-col h-full min-h-0 overflow-hidden">
+          <div className="md:col-span-9 flex flex-col h-full min-h-0 overflow-hidden">
 
             {/* Header compacto */}
             <div className="h-16 flex-shrink-0">
@@ -59,7 +59,7 @@ const Index = () => {
             </div>
             
             {/* Tarjetas de temperatura - Responsive */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 landscape:md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -80,19 +80,19 @@ const Index = () => {
           </div>
           
           {/* Columna lateral - En mobile se coloca debajo */}
-          <div className="landscape:md:col-span-3 flex flex-col landscape:md:flex-col gap-2 h-auto landscape:md:h-full">
+          <div className="md:col-span-3 flex flex-col gap-2 h-auto md:h-full">
             
-            {/* En mobile portrait: componentes en fila horizontal */}
-            <div className="flex flex-row landscape:md:flex-col gap-2 h-auto landscape:md:h-full">
-              <div className="flex-1 landscape:md:flex-1">
+            {/* Solo en mobile portrait: componentes en fila horizontal, resto en columna */}
+            <div className="flex flex-row portrait:sm:flex-row md:flex-col gap-2 h-auto md:h-full">
+              <div className="flex-1 md:flex-1">
                 <SolarProduction />
               </div>
               
-              <div className="flex-1 landscape:md:h-24 landscape:md:shrink-0">
+              <div className="flex-1 md:h-24 md:shrink-0">
                 <NextVisit />
               </div>
               
-              <div className="flex-1 landscape:md:h-20 landscape:md:shrink-0">
+              <div className="flex-1 md:h-20 md:shrink-0">
                 <AlertsSection />
               </div>
             </div>
