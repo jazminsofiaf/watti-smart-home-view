@@ -38,14 +38,15 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-ivory-mist overflow-hidden">
       
-      {/* Main Content Grid - Sin scroll, altura fija */}
+      {/* Main Content Grid - Responsive */}
       <div className="p-2 flex flex-col h-full overflow-hidden"
          style={{ height: "var(--app-height)" }}
       >
-        <div className="grid grid-cols-12 gap-2 flex-1 min-h-0">
+        {/* Desktop: Grid de 2 columnas, Mobile Portrait: Columna única */}
+        <div className="grid grid-cols-1 landscape:md:grid-cols-12 gap-2 flex-1 min-h-0">
               
           {/* Columna principal - Control de temperatura */}
-          <div className="col-span-9 flex flex-col h-full min-h-0 overflow-hidden">
+          <div className="landscape:md:col-span-9 flex flex-col h-full min-h-0 overflow-hidden">
 
             {/* Header compacto */}
             <div className="h-16 flex-shrink-0">
@@ -57,8 +58,8 @@ const Index = () => {
               <VoiceAssistant />
             </div>
             
-            {/* Tarjetas de temperatura */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0">
+            {/* Tarjetas de temperatura - Responsive */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 landscape:md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -78,16 +79,22 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Columna lateral compacta - se ajusta a la altura de la columna izquierda */}
-          <div className="col-span-3 flex flex-col gap-2 h-full">
-            <div className="flex-1">
-              <SolarProduction />
-            </div>
-            <div className="h-24 shrink-0">
-              <NextVisit />
-            </div>
-            <div className="h-20 shrink-0">
-              <AlertsSection />
+          {/* Columna lateral - En mobile se coloca debajo */}
+          <div className="landscape:md:col-span-3 flex flex-col landscape:md:flex-col gap-2 h-auto landscape:md:h-full">
+            
+            {/* En mobile portrait: componentes en fila horizontal */}
+            <div className="flex flex-row landscape:md:flex-col gap-2 h-auto landscape:md:h-full">
+              <div className="flex-1 landscape:md:flex-1">
+                <SolarProduction />
+              </div>
+              
+              <div className="flex-1 landscape:md:h-24 landscape:md:shrink-0">
+                <NextVisit />
+              </div>
+              
+              <div className="flex-1 landscape:md:h-20 landscape:md:shrink-0">
+                <AlertsSection />
+              </div>
             </div>
           </div>
         </div>
