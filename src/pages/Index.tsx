@@ -39,11 +39,10 @@ const Index = () => {
     <div className="min-h-screen bg-ivory-mist overflow-hidden">
       
       {/* Main Content Grid - Sin scroll, altura fija */}
-      <div className="p-2 flex flex-col  h-full overflow-hidden"
+      <div className="p-2 flex flex-col h-full overflow-hidden"
          style={{ height: "var(--app-height)" }}
       >
-        <div className="grid grid-cols-12 gap-2 h-full">
-
+        <div className="grid grid-cols-12 gap-2 flex-1 min-h-0">
               
           {/* Columna principal - Control de temperatura */}
           <div className="col-span-9 flex flex-col h-full min-h-0 overflow-hidden">
@@ -59,7 +58,7 @@ const Index = () => {
             </div>
             
             {/* Tarjetas de temperatura */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -79,15 +78,15 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Columna lateral compacta */}
-          <div className="col-span-3 grid grid-rows-4 gap-2 h-full overflow-hidden">
-            <div className="row-span-2 h-full overflow-hidden">
+          {/* Columna lateral compacta - se ajusta a la altura de la columna izquierda */}
+          <div className="col-span-3 flex flex-col gap-2 h-full">
+            <div className="flex-1">
               <SolarProduction />
             </div>
-            <div className="row-span-1 h-full overflow-hidden">
+            <div className="h-24 shrink-0">
               <NextVisit />
             </div>
-            <div className="row-span-1 h-full overflow-hidden">
+            <div className="h-20 shrink-0">
               <AlertsSection />
             </div>
           </div>
