@@ -8,35 +8,41 @@ interface VoiceProcessingScreenProps {
 
 const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
   const [currentPhase, setCurrentPhase] = useState<'listening' | 'processing' | 'responding'>('listening');
-  const [userText, setUserText] = useState('');
-  const [botResponse, setBotResponse] = useState('');
+  const [currentMessage, setCurrentMessage] = useState('');
+  const [isUserMessage, setIsUserMessage] = useState(true);
 
   // Simular el proceso de reconocimiento de voz y respuesta
   useEffect(() => {
     const timer1 = setTimeout(() => {
-      setUserText('Watti, nos vamos a la Costa Brava este fin de semana.');
+      setCurrentMessage('Watti, nos vamos a la Costa Brava este fin de semana.');
+      setIsUserMessage(true);
     }, 1000);
 
     const timer2 = setTimeout(() => {
-      setUserText('Watti, nos vamos a la Costa Brava este fin de semana. Volvemos el lunes a la 1 am.');
+      setCurrentMessage('Watti, nos vamos a la Costa Brava este fin de semana. Volvemos el lunes a la 1 am.');
+      setIsUserMessage(true);
     }, 2500);
 
     const timer3 = setTimeout(() => {
-      setUserText('Watti, nos vamos a la Costa Brava este fin de semana. Volvemos el lunes a la 1 am. Queremos los cuartos a 22° al volver.');
+      setCurrentMessage('Watti, nos vamos a la Costa Brava este fin de semana. Volvemos el lunes a la 1 am. Queremos los cuartos a 22° al volver.');
       setCurrentPhase('processing');
+      setIsUserMessage(true);
     }, 4000);
 
     const timer4 = setTimeout(() => {
       setCurrentPhase('responding');
-      setBotResponse('Perfecto. Todos los aires se han apagado.');
+      setCurrentMessage('Perfecto. Todos los aires se han apagado.');
+      setIsUserMessage(false);
     }, 5500);
 
     const timer5 = setTimeout(() => {
-      setBotResponse('Perfecto. Todos los aires se han apagado. Se minimizará el consumo energético.');
+      setCurrentMessage('Perfecto. Todos los aires se han apagado. Se minimizará el consumo energético.');
+      setIsUserMessage(false);
     }, 6500);
 
     const timer6 = setTimeout(() => {
-      setBotResponse('Perfecto. Todos los aires se han apagado. Se minimizará el consumo energético. El lunes a las 00:30 se activarán los aires para que encuentres la casa a 22°.');
+      setCurrentMessage('Perfecto. Todos los aires se han apagado. Se minimizará el consumo energético. El lunes a las 00:30 se activarán los aires para que encuentres la casa a 22°.');
+      setIsUserMessage(false);
     }, 8000);
 
     const timer7 = setTimeout(() => {
@@ -86,7 +92,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
         ✕
       </button>
 
-      {/* Icono principal */}
+      {/* Icono principal - Posición fija */}
       <div className="mb-8">
         {getIcon()}
       </div>
@@ -96,19 +102,17 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
         {getStatusText()}
       </h2>
 
-      {/* Texto del usuario */}
-      {userText && (
-        <div className="bg-white rounded-lg p-4 mb-6 max-w-2xl w-full shadow-lg">
-          <h3 className="text-lg font-semibold text-dusty-cyan mb-2">Tu mensaje:</h3>
-          <p className="text-midnight-teal">{userText}</p>
-        </div>
-      )}
-
-      {/* Respuesta del bot */}
-      {botResponse && (
-        <div className="bg-sage-green/20 rounded-lg p-4 max-w-2xl w-full shadow-lg">
-          <h3 className="text-lg font-semibold text-deep-slate-blue mb-2">Watti responde:</h3>
-          <p className="text-midnight-teal">{botResponse}</p>
+      {/* Mensaje actual - Solo uno a la vez */}
+      {currentMessage && (
+        <div className={`rounded-lg p-4 max-w-2xl w-full shadow-lg ${
+          isUserMessage 
+            ? 'bg-white' 
+            : 'bg-sage-green/20'
+        }`}>
+          <h3 className="text-lg font-semibold mb-2 text-dusty-cyan">
+            {isUserMessage ? 'Tu mensaje:' : 'Watti responde:'}
+          </h3>
+          <p className="text-midnight-teal">{currentMessage}</p>
         </div>
       )}
 
