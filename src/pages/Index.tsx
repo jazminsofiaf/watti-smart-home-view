@@ -58,8 +58,8 @@ const Index = () => {
               <VoiceAssistant />
             </div>
             
-            {/* Tarjetas de temperatura - Responsive */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0">
+            {/* Tarjetas de temperatura - Responsive con mejor espaciado en móvil */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0 mb-4 md:mb-2">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -73,14 +73,14 @@ const Index = () => {
               ))}
             </div>
             
-            {/* Banner inferior con eco-hack */}
-            <div className="mt-2 shrink-0">
+            {/* Banner inferior con eco-hack - Posición fija en móvil */}
+            <div className="shrink-0">
               <EcoHackBanner />
             </div>
           </div>
           
           {/* Columna lateral - Siempre en columna */}
-          <div className="md:col-span-3 flex flex-col gap-2 h-auto md:h-full">
+          <div className="md:col-span-3 flex flex-col gap-2 h-auto md:h-full mt-4 md:mt-0">
             
             {/* Los componentes siempre en columna */}
             <div className="flex flex-col gap-2 h-auto md:h-full">
