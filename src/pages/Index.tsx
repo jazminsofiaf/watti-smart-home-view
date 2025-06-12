@@ -58,8 +58,8 @@ const Index = () => {
               <VoiceAssistant />
             </div>
             
-            {/* Tarjetas de temperatura - Responsive con mejor espaciado en móvil */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0 mb-4 md:mb-2">
+            {/* Tarjetas de temperatura - Sin margin bottom en móvil para evitar overflow */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 w-full flex-1 min-h-0 overflow-y-auto">
               {roomData.map((room, index) => (
                 <TemperatureCard
                   key={index}
@@ -73,8 +73,8 @@ const Index = () => {
               ))}
             </div>
             
-            {/* Banner inferior con eco-hack - Posición fija en móvil */}
-            <div className="shrink-0">
+            {/* Banner inferior con eco-hack - Margen top reducido */}
+            <div className="shrink-0 mt-2">
               <EcoHackBanner />
             </div>
           </div>
