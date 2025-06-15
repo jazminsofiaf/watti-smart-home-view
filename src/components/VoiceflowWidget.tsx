@@ -74,7 +74,7 @@ const VoiceflowWidget = () => {
 
       switch (data.type) {
         case 'voiceflow:open':
-          console.log('--->Widget abierton-> mostrar ICONO');
+          console.log('Widget abierto -> mostrar animacion de hablar');
           setIsSpeaking(true);
           break;
 
@@ -84,7 +84,7 @@ const VoiceflowWidget = () => {
           if (Array.isArray(turns) && turns.length > 0) {
             const lastTurn = turns[turns.length - 1];
             if (lastTurn?.type === 'system') {
-              console.log('--->TEMINO DE HABLAR -> ELIMINAR ICONO');
+              console.log('Mensaje proveniente del sistema -> eliminar animacion de hablar');
               setIsSpeaking(false);
             }
           }
@@ -116,7 +116,7 @@ const VoiceflowWidget = () => {
         autostart: true,
       }).then(() => {
         // Widget oculto
-        //window.voiceflow?.chat.hide();
+        window.voiceflow?.chat.hide();
 
         // Lanzar sesión
         window.voiceflow?.chat.interact({ type: 'launch' }).then((response) => {
@@ -188,7 +188,7 @@ const VoiceflowWidget = () => {
 
 
   const handleVoiceClick = () => {
-    
+
     if (!voiceRecognition.current) return;
 
     if (isListening) {
