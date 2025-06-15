@@ -24,10 +24,15 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
     recognition.lang = 'es-ES';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
+    recognition.continuous = true;
 
     recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
+      const transcript = event.results[event.results.length - 1][0].transcript;
       console.log('Texto reconocido:', transcript);
+
+      // Detener reconocimiento después de capturar el texto
+      recognition.stop();
+      setIsListening(false);
 
       // Enviar el texto a Voiceflow
       if (window.voiceflow?.chat) {
@@ -38,9 +43,9 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       }
     };
 
-    recognition.onspeechend = () => {
-      console.log('Usuario dejó de hablar, deteniendo reconocimiento...');
-      recognition.stop();
+    recognition.onerror = (event: any) => {
+      console.error('Error de reconocimiento de voz:', event.error);
+      setIsListening(false);
     };
 
     recognition.onend = () => {
@@ -48,23 +53,30 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       setIsListening(false);
     };
 
-    recognition.onerror = (event: any) => {
-      console.error('Error de reconocimiento de voz:', event.error);
-      setIsListening(false);
-    };
-
     voiceRecognition.current = recognition;
   }, []);
 
-  const handleVoiceClick = () => {
-    if (!voiceRecognition.current || isSpeaking) return;
+  // Activar micrófono automáticamente cuando el sistema deje de hablar
+  useEffect(() => {
+    if (!isSpeaking && !isListening && voiceRecognition.current) {
+      console.log('Sistema dejó de hablar, activando micrófono automáticamente...');
+      setTimeout(() => {
+        if (voiceRecognition.current && !isSpeaking) {
+          voiceRecognition.current.start();
+          setIsListening(true);
+        }
+      }, 500); // Pequeño delay para evitar conflictos
+    }
+  }, [isSpeaking, isListening]);
 
-    if (isListening) {
+  const handleVoiceClick = () => {
+    if (isSpeaking) return;
+
+    if (isListening && voiceRecognition.current) {
+      // Si está escuchando, detener el reconocimiento
+      console.log('Deteniendo reconocimiento de voz por clic del usuario...');
       voiceRecognition.current.stop();
       setIsListening(false);
-    } else {
-      voiceRecognition.current.start();
-      setIsListening(true);
     }
   };
 
@@ -113,8 +125,8 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
             isSpeaking 
               ? 'Watti está hablando...' 
               : isListening 
-                ? 'Escuchando... Haz clic para parar'
-                : 'Haz clic para hablar'
+                ? 'Haz clic para detener el reconocimiento'
+                : 'El micrófono se activará automáticamente'
           }
         >
           {isSpeaking ? (
@@ -130,8 +142,8 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
           {isSpeaking 
             ? 'Espera a que Watti termine de hablar'
             : isListening 
-              ? 'Hablando... Haz clic para detener'
-              : 'Haz clic en el micrófono para hablar'
+              ? 'Escuchando... Haz clic para detener'
+              : 'El micrófono se activará automáticamente'
           }
         </p>
       </div>
