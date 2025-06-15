@@ -10,7 +10,9 @@ interface VoiceProcessingScreenProps {
 const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [isMicrophoneEnabled, setIsMicrophoneEnabled] = useState(false); // Inicializar como deshabilitado
   const voiceRecognition = useRef<any | null>(null);
+  const audioCheckInterval = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -33,6 +35,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       // Detener reconocimiento después de capturar el texto
       recognition.stop();
       setIsListening(false);
+      setIsMicrophoneEnabled(false); // Deshabilitar hasta que termine el sistema
 
       // Enviar el texto a Voiceflow
       if (window.voiceflow?.chat) {
@@ -56,21 +59,59 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
     voiceRecognition.current = recognition;
   }, []);
 
-  // Activar micrófono automáticamente cuando el sistema deje de hablar
+  // Función para verificar si el navegador está reproduciendo audio
+  const checkAudioPlayback = () => {
+    if ('speechSynthesis' in window) {
+      const isSpeaking = window.speechSynthesis.speaking;
+      return isSpeaking;
+    }
+    return false;
+  };
+
+  // Monitorear el estado del audio del navegador
   useEffect(() => {
-    if (!isSpeaking && !isListening && voiceRecognition.current) {
-      console.log('Sistema dejó de hablar, activando micrófono automáticamente...');
+    if (isSpeaking) {
+      // Iniciar el monitoreo del audio cuando el sistema empiece a hablar
+      audioCheckInterval.current = setInterval(() => {
+        const isAudioPlaying = checkAudioPlayback();
+        
+        if (!isAudioPlaying && isSpeaking) {
+          // El audio terminó, habilitar micrófono
+          console.log('Audio terminado, habilitando micrófono...');
+          setIsMicrophoneEnabled(true);
+          
+          // Limpiar el intervalo
+          if (audioCheckInterval.current) {
+            clearInterval(audioCheckInterval.current);
+            audioCheckInterval.current = null;
+          }
+        }
+      }, 100); // Verificar cada 100ms
+    }
+
+    return () => {
+      if (audioCheckInterval.current) {
+        clearInterval(audioCheckInterval.current);
+        audioCheckInterval.current = null;
+      }
+    };
+  }, [isSpeaking]);
+
+  // Activar micrófono automáticamente cuando esté habilitado y el sistema no esté hablando
+  useEffect(() => {
+    if (isMicrophoneEnabled && !isSpeaking && !isListening && voiceRecognition.current) {
+      console.log('Activando micrófono automáticamente...');
       setTimeout(() => {
-        if (voiceRecognition.current && !isSpeaking) {
+        if (voiceRecognition.current && isMicrophoneEnabled && !isSpeaking) {
           voiceRecognition.current.start();
           setIsListening(true);
         }
       }, 500); // Pequeño delay para evitar conflictos
     }
-  }, [isSpeaking, isListening]);
+  }, [isMicrophoneEnabled, isSpeaking, isListening]);
 
   const handleVoiceClick = () => {
-    if (isSpeaking) return;
+    if (isSpeaking || !isMicrophoneEnabled) return;
 
     if (isListening && voiceRecognition.current) {
       // Si está escuchando, detener el reconocimiento
@@ -113,37 +154,41 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       <div className="flex flex-col items-center space-y-4">
         <button
           onClick={handleVoiceClick}
-          disabled={isSpeaking}
+          disabled={isSpeaking || !isMicrophoneEnabled}
           className={`p-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border-4 ${
-            isSpeaking 
+            isSpeaking || !isMicrophoneEnabled
               ? 'bg-gray-300 border-gray-400 cursor-not-allowed' 
               : isListening
                 ? 'bg-red-100 border-red-400 animate-pulse'
-                : 'bg-white border-sage-green hover:bg-sage-green/10'
+                : 'bg-white border-deep-slate-blue hover:bg-deep-slate-blue/10'
           }`}
           title={
             isSpeaking 
               ? 'Watti está hablando...' 
-              : isListening 
-                ? 'Haz clic para detener el reconocimiento'
-                : 'El micrófono se activará automáticamente'
+              : !isMicrophoneEnabled
+                ? 'Esperando a que termine el audio...'
+                : isListening 
+                  ? 'Haz clic para detener el reconocimiento'
+                  : 'El micrófono se activará automáticamente'
           }
         >
-          {isSpeaking ? (
+          {isSpeaking || !isMicrophoneEnabled ? (
             <MicOff className="w-8 h-8 text-gray-500" />
           ) : isListening ? (
             <Mic className="w-8 h-8 text-red-500" />
           ) : (
-            <Mic className="w-8 h-8 text-sage-green" />
+            <Mic className="w-8 h-8 text-deep-slate-blue" />
           )}
         </button>
 
         <p className="text-center text-dusty-cyan text-sm">
           {isSpeaking 
             ? 'Espera a que Watti termine de hablar'
-            : isListening 
-              ? 'Escuchando... Haz clic para detener'
-              : 'El micrófono se activará automáticamente'
+            : !isMicrophoneEnabled
+              ? 'Esperando a que termine el audio...'
+              : isListening 
+                ? 'Escuchando... Haz clic para detener'
+                : 'El micrófono se activará automáticamente'
           }
         </p>
       </div>
