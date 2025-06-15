@@ -15,7 +15,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
         ✕
       </button>
 
-      <div className=" voice flow widget component">
+      <div>
         <VoiceflowWidget />
       </div>
     </div>
