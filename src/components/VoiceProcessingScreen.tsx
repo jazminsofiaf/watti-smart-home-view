@@ -8,7 +8,7 @@ interface VoiceProcessingScreenProps {
 }
 
 const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isWattiSpeaking, setIsWattiSpeaking] = useState(true);
   const [isListening, setIsListening] = useState(false);
   const [isMicrophoneEnabled, setIsMicrophoneEnabled] = useState(false); // Inicializar como deshabilitado
   const voiceRecognition = useRef<any | null>(null);
@@ -59,59 +59,22 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
     voiceRecognition.current = recognition;
   }, []);
 
-  // Función para verificar si el navegador está reproduciendo audio
-  const checkAudioPlayback = () => {
-    if ('speechSynthesis' in window) {
-      const isSpeaking = window.speechSynthesis.speaking;
-      return isSpeaking;
-    }
-    return false;
-  };
-
-  // Monitorear el estado del audio del navegador
-  useEffect(() => {
-    if (isSpeaking) {
-      // Iniciar el monitoreo del audio cuando el sistema empiece a hablar
-      audioCheckInterval.current = setInterval(() => {
-        const isAudioPlaying = checkAudioPlayback();
-        
-        if (!isAudioPlaying && isSpeaking) {
-          // El audio terminó, habilitar micrófono
-          console.log('Audio terminado, habilitando micrófono...');
-          setIsMicrophoneEnabled(true);
-          
-          // Limpiar el intervalo
-          if (audioCheckInterval.current) {
-            clearInterval(audioCheckInterval.current);
-            audioCheckInterval.current = null;
-          }
-        }
-      }, 100); // Verificar cada 100ms
-    }
-
-    return () => {
-      if (audioCheckInterval.current) {
-        clearInterval(audioCheckInterval.current);
-        audioCheckInterval.current = null;
-      }
-    };
-  }, [isSpeaking]);
-
+  
   // Activar micrófono automáticamente cuando esté habilitado y el sistema no esté hablando
   useEffect(() => {
-    if (isMicrophoneEnabled && !isSpeaking && !isListening && voiceRecognition.current) {
+    if (isMicrophoneEnabled && !isWattiSpeaking && !isListening && voiceRecognition.current) {
       console.log('Activando micrófono automáticamente...');
       setTimeout(() => {
-        if (voiceRecognition.current && isMicrophoneEnabled && !isSpeaking) {
+        if (voiceRecognition.current && isMicrophoneEnabled && !isWattiSpeaking) {
           voiceRecognition.current.start();
           setIsListening(true);
         }
       }, 500); // Pequeño delay para evitar conflictos
     }
-  }, [isMicrophoneEnabled, isSpeaking, isListening]);
+  }, [isMicrophoneEnabled, isWattiSpeaking, isListening]);
 
   const handleVoiceClick = () => {
-    if (isSpeaking || !isMicrophoneEnabled) return;
+    if (isWattiSpeaking || !isMicrophoneEnabled) return;
 
     if (isListening && voiceRecognition.current) {
       // Si está escuchando, detener el reconocimiento
@@ -119,7 +82,31 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       voiceRecognition.current.stop();
       setIsListening(false);
     }
-  };
+  };  
+
+  useEffect(() => {
+    // Iniciar el monitoreo del audio cuando el sistema empiece a hablar
+    audioCheckInterval.current = setInterval(() => {
+      if (!isWattiSpeaking) {
+        // El audio terminó, habilitar micrófono
+        console.log('Audio terminado, habilitando micrófono...');
+        setIsMicrophoneEnabled(true);
+
+        // Limpiar el intervalo
+        if (audioCheckInterval.current) {
+          clearInterval(audioCheckInterval.current);
+          audioCheckInterval.current = null;
+        }
+      }
+     }, 200); // Verificar cada 100ms
+
+    return () => {
+      if (audioCheckInterval.current) {
+        clearInterval(audioCheckInterval.current);
+        audioCheckInterval.current = null;
+      }
+    };
+  }, );
 
   return (
     <div className="min-h-screen bg-ivory-mist flex flex-col items-center justify-center p-6">
@@ -131,7 +118,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       </button>
 
       {/* Animación cuando el sistema está hablando */}
-      {isSpeaking && (
+      {isWattiSpeaking && (
         <div className="mb-8 flex flex-col items-center">
           <div className="flex space-x-2 mb-4">
             {[...Array(5)].map((_, i) => (
@@ -154,16 +141,16 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       <div className="flex flex-col items-center space-y-4">
         <button
           onClick={handleVoiceClick}
-          disabled={isSpeaking || !isMicrophoneEnabled}
+          disabled={isWattiSpeaking || !isMicrophoneEnabled}
           className={`p-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border-4 ${
-            isSpeaking || !isMicrophoneEnabled
+            isWattiSpeaking || !isMicrophoneEnabled
               ? 'bg-gray-300 border-gray-400 cursor-not-allowed' 
               : isListening
                 ? 'bg-red-100 border-red-400 animate-pulse'
                 : 'bg-white border-deep-slate-blue hover:bg-deep-slate-blue/10'
           }`}
           title={
-            isSpeaking 
+            isWattiSpeaking 
               ? 'Watti está hablando...' 
               : !isMicrophoneEnabled
                 ? 'Esperando a que termine el audio...'
@@ -172,7 +159,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
                   : 'El micrófono se activará automáticamente'
           }
         >
-          {isSpeaking || !isMicrophoneEnabled ? (
+          {isWattiSpeaking || !isMicrophoneEnabled ? (
             <MicOff className="w-8 h-8 text-gray-500" />
           ) : isListening ? (
             <Mic className="w-8 h-8 text-red-500" />
@@ -182,7 +169,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
         </button>
 
         <p className="text-center text-dusty-cyan text-sm">
-          {isSpeaking 
+          {isWattiSpeaking 
             ? 'Espera a que Watti termine de hablar'
             : !isMicrophoneEnabled
               ? 'Esperando a que termine el audio...'
@@ -196,7 +183,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       {/* Widget de Voiceflow oculto */}
       <div style={{ display: 'none' }}>
         <VoiceflowWidget 
-          onSpeakingChange={setIsSpeaking}
+          onWattiSpeakingChange={setIsWattiSpeaking}
         />
       </div>
     </div>

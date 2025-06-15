@@ -24,6 +24,9 @@ declare global {
 type VoiceflowMessage = {
   type: string;
   payload?: {
+    action?: {
+      type: string;
+    };
     session?:{
       turns: Array<{
           id: string;
@@ -46,10 +49,10 @@ type VoiceflowMessage = {
 };
 
 interface VoiceflowWidgetProps {
-  onSpeakingChange?: (isSpeaking: boolean) => void;
+  onWattiSpeakingChange?: (isWattiSpeaking: boolean) => void;
 }
 
-const VoiceflowWidget = ({ onSpeakingChange }: VoiceflowWidgetProps) => {
+const VoiceflowWidget = ({ onWattiSpeakingChange }: VoiceflowWidgetProps) => {
   const location = useLocation();
   const cleanupRef = useRef<(() => void) | null>(null);
 
@@ -82,17 +85,37 @@ const VoiceflowWidget = ({ onSpeakingChange }: VoiceflowWidgetProps) => {
       switch (data.type) {
         case 'voiceflow:open':
           console.log('Widget abierto -> mostrar animacion de hablar');
-          onSpeakingChange?.(true);
+          onWattiSpeakingChange?.(true);
           break;
 
         case 'voiceflow:interact':
           if (data.payload?.session?.status !== 'ACTIVE') return;
+          const userAction = data.payload?.action
+          console.log(` userAction type: ${ userAction?.type } `)
+          if (userAction?.type === 'text'){
+            //se manda mensaje a travez de texto (luego de transcribir el reconocimeinto)
+            console.log(`Se mando un mensaje watti -> ahora debe estar hablando`);
+            onWattiSpeakingChange?.(true);
+            break;
+          }
           const turns = data.payload?.session?.turns;
           if (Array.isArray(turns) && turns.length > 0) {
             const lastTurn = turns[turns.length - 1];
             if (lastTurn?.type === 'system') {
               console.log('Mensaje proveniente del sistema -> eliminar animacion de hablar');
-              onSpeakingChange?.(false);
+              const lastMessage = lastTurn.messages[lastTurn.messages.length - 1];
+              if (lastMessage.type === 'text' && lastMessage.text?.length) {
+                // Extraemos el texto plano
+                const text = lastMessage.text.map(t => t.children.map(c => c.text).join('')).join('\n')
+
+                const duration = estimateSpeakingTime(text);
+                console.log(`Watti speaking duration estimated: ${duration} ms`);
+
+                setTimeout(() => {
+                   console.log(`Watti shut up`);
+                  onWattiSpeakingChange?.(false);
+                }, duration);
+              }
             }
           }
           break;
@@ -103,6 +126,14 @@ const VoiceflowWidget = ({ onSpeakingChange }: VoiceflowWidgetProps) => {
         default:
           break;
       }
+    };
+
+    const wordsPerMinute = 95;
+
+    const estimateSpeakingTime = (text: string) => {
+      const words = text.trim().split(/\s+/).length;
+      const minutes = words / wordsPerMinute;
+      return minutes * 60 * 1000; // ms
     };
 
     script.onload = () => {
@@ -147,13 +178,13 @@ const VoiceflowWidget = ({ onSpeakingChange }: VoiceflowWidgetProps) => {
       if (script.parentNode) {
         document.head.removeChild(script);
       }
-      onSpeakingChange?.(false);
+      onWattiSpeakingChange?.(false);
     };
 
     cleanupRef.current = cleanup;
 
     return cleanup;
-  }, [location.pathname, onSpeakingChange]);
+  }, [location.pathname, onWattiSpeakingChange]);
 
   // Limpiar cuando se desmonta o se sale de /agent
   useEffect(() => {
