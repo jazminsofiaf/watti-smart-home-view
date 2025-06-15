@@ -24,9 +24,23 @@ declare global {
 type VoiceflowMessage = {
   type: string;
   payload?: {
+    status?: string
     action?: {
       type: string;
     };
+    turns: Array<{
+      id: string;
+      type: string;
+      timestamp: number;
+      messages?: Array<{
+        id: string;
+        type: string;
+        text?: Array<{
+          children: Array<{ text: string }>;
+        }>;
+        delay?: number;
+      }>;
+    }>;
     session?:{
       turns: Array<{
           id: string;
@@ -98,9 +112,9 @@ const VoiceflowWidget = ({ onWattiSpeakingChange }: VoiceflowWidgetProps) => {
             onWattiSpeakingChange?.(true);
             break;
           }
-          const turns = data.payload?.session?.turns;
-          if (Array.isArray(turns) && turns.length > 0) {
-            const lastTurn = turns[turns.length - 1];
+          const seesonTurns = data.payload?.session?.turns;
+          if (Array.isArray(seesonTurns) && seesonTurns.length > 0) {
+            const lastTurn = seesonTurns[seesonTurns.length - 1];
             if (lastTurn?.type === 'system') {
               console.log('Mensaje proveniente del sistema -> eliminar animacion de hablar');
               const lastMessage = lastTurn.messages[lastTurn.messages.length - 1];
@@ -121,6 +135,27 @@ const VoiceflowWidget = ({ onWattiSpeakingChange }: VoiceflowWidgetProps) => {
           break;
 
         case 'voiceflow:save_session':
+          if (data.payload?.status !== 'ACTIVE') return;
+          const turns = data.payload?.turns;
+          if (Array.isArray(turns) && turns.length > 0) {
+            const lastTurn = turns[turns.length - 1];
+            if (lastTurn?.type === 'system') {
+              console.log('Mensaje proveniente del sistema -> eliminar animacion de hablar');
+              const lastMessage = lastTurn.messages[lastTurn.messages.length - 1];
+              if (lastMessage.type === 'text' && lastMessage.text?.length) {
+                // Extraemos el texto plano
+                const text = lastMessage.text.map(t => t.children.map(c => c.text).join('')).join('\n')
+
+                const duration = estimateSpeakingTime(text);
+                console.log(`Watti speaking duration estimated: ${duration} ms`);
+
+                setTimeout(() => {
+                   console.log(`Watti shut up`);
+                  onWattiSpeakingChange?.(false);
+                }, duration);
+              }
+            }
+          }
           break;
 
         default:

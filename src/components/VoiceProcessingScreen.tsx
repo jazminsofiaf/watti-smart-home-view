@@ -35,6 +35,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       // Detener reconocimiento después de capturar el texto
       recognition.stop();
       setIsListening(false);
+      setIsWattiSpeaking(true);
       setIsMicrophoneEnabled(false); // Deshabilitar hasta que termine el sistema
 
       // Enviar el texto a Voiceflow
