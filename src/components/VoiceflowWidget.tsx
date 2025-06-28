@@ -173,7 +173,7 @@ const VoiceflowWidget = ({ onWattiSpeakingChange }: VoiceflowWidgetProps) => {
 
     script.onload = () => {
       window.voiceflow?.chat.load({
-        verify: { projectID: '684e9e69921b2a3ad591531a' },
+        verify: { projectID: '6860328bde64374aed266ad4' },
         url: 'https://general-runtime.voiceflow.com',
         versionID: 'production',
         assistant: {
@@ -233,3 +233,5 @@ const VoiceflowWidget = ({ onWattiSpeakingChange }: VoiceflowWidgetProps) => {
 };
 
 export default VoiceflowWidget;
+
+
