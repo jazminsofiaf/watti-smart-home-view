@@ -13,7 +13,7 @@ const VoiceProcessingScreenApi = ({ onClose }: VoiceProcessingScreenProps) => {
   const projectID = 'watti';
   const sessionID = 'constant-session';
   const baseURL = 'https://general-runtime.voiceflow.com';
-  const bearerToken = 'Bearer VF.DM.684eb21b474f88a339bc0da4.q9ugHmyuxpRFoQec';
+  const bearerToken = 'Bearer VF.DM.68603e20b1ecb043e631dc0b.Py3m0ycQaDIZwIqe';
 
   const speakText = (text: string): Promise<void> => {
     return new Promise((resolve) => {
