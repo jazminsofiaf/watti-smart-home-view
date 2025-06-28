@@ -140,7 +140,7 @@ const VoiceflowWidget = ({ onWattiSpeakingChange }: VoiceflowWidgetProps) => {
           if (Array.isArray(turns) && turns.length > 0) {
             const lastTurn = turns[turns.length - 1];
             if (lastTurn?.type === 'system') {
-              console.log('Mensaje proveniente del sistema -> eliminar animacion de hablar');
+              console.log('Mensaje proveniente del sistema!! -> eliminar animacion de hablar');
               const lastMessage = lastTurn.messages[lastTurn.messages.length - 1];
               if (lastMessage && lastMessage.type === 'text' && lastMessage.text?.length) {
                 // Extraemos el texto plano
