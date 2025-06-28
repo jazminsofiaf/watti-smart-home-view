@@ -21,7 +21,7 @@ const EcoHackBanner = () => {
         <div>
           <h4 className="text-midnight-teal font-semibold text-xs sm:text-sm mb-1">Eco-hack del día</h4>
           <p className="text-midnight-teal text-xs sm:text-sm">
-            Cerrá la puerta del pasillo al encender el aire para ahorrar 12%
+            Cierra la puerta del pasillo al encender el aire para ahorrar 12%
           </p>
         </div>
       </div>
