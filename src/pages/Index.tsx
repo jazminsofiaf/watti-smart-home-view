@@ -12,7 +12,7 @@ const Index = () => {
     {
       roomId: 'dormitorio',
       room: 'Dormitorio',
-      currentTemp: 22,
+      currentTemp: 20,
       targetTemp: 23,
       status: 'heating' as const,
       isActive: true
@@ -83,8 +83,8 @@ const Index = () => {
           <div className="md:col-span-3 flex flex-col gap-2 h-auto md:h-full mt-4 md:mt-0">
             
             {/* Los componentes siempre en columna */}
-            <div className="flex flex-col gap-2 h-auto md:h-full">
-              <div className="md:flex-1">
+            <div className="flex flex-col gap-2 h-auto md:h-full mt-4 ">
+              <div> 
                 <SolarProduction />
               </div>
               

@@ -18,25 +18,25 @@ const ProductionStats = () => {
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-sage-green/10 rounded-lg p-3 text-center">
           <p className="text-xs text-dusty-cyan mb-1">Producción Mensual</p>
-          <p className="text-xl font-bold text-sage-green">485 kWh</p>
+          <p className="text-xl font-bold text-sage-green">159 kWh</p>
           <p className="text-xs text-sage-green">+12% vs mes anterior</p>
         </div>
 
         <div className="bg-sage-green/10 rounded-lg p-3 text-center">
           <p className="text-xs text-dusty-cyan mb-1">Producción Anual</p>
-          <p className="text-xl font-bold text-sage-green">5240kWh</p>
+          <p className="text-xl font-bold text-sage-green">1040kWh</p>
           <p className="text-xs text-sage-green">Meta: 5,800 kWh</p>
         </div>
 
         <div className="bg-dusty-cyan/10 rounded-lg p-3 text-center">
           <p className="text-xs text-dusty-cyan mb-1">Autoconsumo</p>
-          <p className="text-xl font-bold text-dusty-cyan">76%</p>
+          <p className="text-xl font-bold text-dusty-cyan">36%</p>
           <TrendingUp className="w-4 h-4 text-dusty-cyan mx-auto mt-1" />
         </div>
 
         <div className="bg-orange-100 rounded-lg p-3 text-center">
           <p className="text-xs text-dusty-cyan mb-1">Energía Importada</p>
-          <p className="text-xl font-bold text-orange-600">24%</p>
+          <p className="text-xl font-bold text-orange-600">64%</p>
           <p className="text-xs text-orange-600">-5% vs mes anterior</p>
         </div>
       </div>

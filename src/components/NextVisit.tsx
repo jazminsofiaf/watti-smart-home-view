@@ -15,7 +15,7 @@ const NextVisit = () => {
       </div>
       
       <div className="space-y-1">
-        <p className="text-dusty-cyan text-xs  mb-0.5">Limpieza aire dormitorio</p>
+        <p className="text-dusty-cyan text-xs  mb-0.5">Limpieza aire del salón</p>
         <p className="text-dusty-cyan text-xs sm:text-sm">Viernes 10:30</p>
       </div>
     </div>

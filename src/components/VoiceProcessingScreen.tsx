@@ -60,7 +60,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
     voiceRecognition.current = recognition;
   }, []);
 
-  
+  /*
   // Activar micrófono automáticamente cuando esté habilitado y el sistema no esté hablando
   useEffect(() => {
     if (isMicrophoneEnabled && !isWattiSpeaking && !isListening && voiceRecognition.current) {
@@ -73,17 +73,23 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       }, 500); // Pequeño delay para evitar conflictos
     }
   }, [isMicrophoneEnabled, isWattiSpeaking, isListening]);
+ */
 
   const handleVoiceClick = () => {
-    if (isWattiSpeaking || !isMicrophoneEnabled) return;
+    //if (isWattiSpeaking || !isMicrophoneEnabled) return;
 
-    if (isListening && voiceRecognition.current) {
+    if (isListening){ //&& voiceRecognition.current) {
       // Si está escuchando, detener el reconocimiento
       console.log('Deteniendo reconocimiento de voz por clic del usuario...');
       voiceRecognition.current.stop();
       setIsListening(false);
     }
+
+    console.log('Microfono activado');
+    voiceRecognition.current.start();
+    setIsListening(true);
   };  
+ 
 
   useEffect(() => {
     // Iniciar el monitoreo del audio cuando el sistema empiece a hablar
@@ -142,7 +148,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
       <div className="flex flex-col items-center space-y-4">
         <button
           onClick={handleVoiceClick}
-          disabled={isWattiSpeaking || !isMicrophoneEnabled}
+          //disabled={isWattiSpeaking || !isMicrophoneEnabled}
           className={`p-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border-4 ${
             isWattiSpeaking || !isMicrophoneEnabled
               ? 'bg-gray-300 border-gray-400 cursor-not-allowed' 
@@ -156,8 +162,8 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
               : !isMicrophoneEnabled
                 ? 'Esperando a que termine el audio...'
                 : isListening 
-                  ? 'Haz clic para detener el reconocimiento'
-                  : 'El micrófono se activará automáticamente'
+                  ? 'Haz click para detener el reconocimiento'
+                  : 'Haz click para hablar'
           }
         >
           {isWattiSpeaking || !isMicrophoneEnabled ? (
@@ -176,7 +182,7 @@ const VoiceProcessingScreen = ({ onClose }: VoiceProcessingScreenProps) => {
               ? 'Esperando a que termine el audio...'
               : isListening 
                 ? 'Escuchando... Haz clic para detener'
-                : 'El micrófono se activará automáticamente'
+                : 'Haz clic para hablarme'
           }
         </p>
       </div>

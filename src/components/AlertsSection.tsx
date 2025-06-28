@@ -43,19 +43,10 @@ const AlertsSection = () => {
   };
 
   return (
-    <div className="space-y-2 sm:space-y-3">
+    <div className="space-y-2 sm:space-y-2">
       <div className="flex items-center gap-2 sm:gap-3 mb-2">
-        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 self-center" />
-        <h3 className="text-sm sm:text-lg font-semibold text-midnight-teal">Alertas</h3>
-        {/* Show more */}
-        {alerts.length > maxVisible && (
-          <button
-            onClick={handleViewAll}
-            className="mt-2 text-xs sm:text-sm text-dusty-cyan underline hover:text-midnight-teal transition"
-          >
-            Ver todas →
-          </button>
-        )}
+        <AlertCircle className="w-3 h-3 sm:w-5 sm:h-5 shrink-0 self-center" />
+        <h5 className="text-sm sm:text-lg font-semibold text-midnight-teal">Alertas</h5>
       </div>
 
       {/* Alerts list (scrollable if needed) */}
@@ -71,6 +62,18 @@ const AlertsSection = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="items-center gap-2 sm:gap-3 mb-2 float-right">
+        {/* Show more */}
+        {alerts.length > maxVisible && (
+          <button
+            onClick={handleViewAll}
+            className="mt-2 text-xs sm:text-sm text-dusty-cyan underline hover:text-midnight-teal transition"
+          >
+            Ver todas las alertas →
+          </button>
+        )}
       </div>
     </div>
   );

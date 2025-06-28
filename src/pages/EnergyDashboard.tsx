@@ -29,7 +29,7 @@ const EnergyDashboard = () => {
           
           {/* Columna izquierda */}
           <div className="md:col-span-4 flex flex-col gap-2">
-             <div className="flex-1">
+             <div>
               <ConsumptionChart />
             </div>
             <div className="m-3 bg-deep-slate-blue/10 rounded-lg p-3 text-center">
@@ -37,21 +37,21 @@ const EnergyDashboard = () => {
                 <Euro className="w-4 h-4 text-deep-slate-blue mr-1" />
                 <p className="text-xs text-dusty-cyan">Ingresos Acumulados</p>
               </div>
-              <p className="text-2xl font-bold text-deep-slate-blue">€1,247</p>
-              <p className="text-xs text-deep-slate-blue">+€89 este mes</p>
+              <p className="text-2xl font-bold text-deep-slate-blue">€347</p>
+              <p className="text-xs text-deep-slate-blue">+€48 este mes</p>
             </div>
           </div>
 
           {/* Columna central */}
           <div className="md:col-span-4 flex flex-col gap-2 h-full">
-            <div className="flex-1 min-h-0">
+            <div className="min-h-0">
               <ProductionStats />
             </div>
           </div>
 
           {/* Columna derecha */}
           <div className="md:col-span-4 flex flex-col gap-2 h-full">
-            <div className="flex-1 min-h-0">
+            <div className=" min-h-0">
               <SolarHours />
             </div>
           </div>

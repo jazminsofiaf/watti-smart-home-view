@@ -26,12 +26,12 @@ const SolarProduction = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
         <div className="text-center">
           <p className="text-dusty-cyan text-xs  mb-0.5">Generado solo hoy</p>
-          <p className="text-base sm:text-lg font-bold text-sage-green">4,7 kWh</p>
+          <p className="text-base sm:text-lg font-bold text-sage-green">54,7 kWh</p>
         </div>
         
         <div className="text-center">
           <p className="text-dusty-cyan text-xs  mb-0.5">Generado este mes</p>
-          <p className="text-base sm:text-lg font-bold text-sage-green">31,5 kWh</p>
+          <p className="text-base sm:text-lg font-bold text-sage-green">159,5 kWh</p>
         </div>
       </div>
       
@@ -45,13 +45,13 @@ const SolarProduction = () => {
           
           <div>
             <span className="text-base sm:text-lg font-bold text-midnight-teal">
-              42 €
+              48 €
             </span>
           </div>
           
           <div>
             <span className="text-sage-green text-xs sm:text-sm flex justify-center items-center">
-              ↑ +8 €
+              ↑ +7 €
             </span>
           </div>
       </div>
